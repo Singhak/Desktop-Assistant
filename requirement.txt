@@ -1,0 +1,6 @@
+weather-api
+SpeachRecognition
+pyAudio
+win32com
+webbrowser
+feedparser

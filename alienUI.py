@@ -1,12 +1,17 @@
 import wx 
 import win32com.client as wincl
-import startpoint
 import productSearch as ps
 import news
-import joke
+import findJoke as joke
+import youtube as ytb
+import festival as fest
+import wikipedia
+import webbrowser
+import speech as s
+import weatherForcast as wf
 
 speak = wincl.Dispatch("SAPI.SpVoice")
-speak.Speak('''Whokum maire aakaa, Alien at your service.''')
+speak.Speak('Whokum maire aakaa, Alien at your service.')
 # GUI creation
 class MyFrame(wx.Frame):
 	def __init__(self):
@@ -17,7 +22,7 @@ class MyFrame(wx.Frame):
 						  title="ALIEN")
 		panel = wx.Panel(self)
 
-		ico = wx.Icon('boy.ico', wx.BITMAP_TYPE_ICO)
+		ico = wx.Icon('alien.ico', wx.BITMAP_TYPE_ICO)
 		self.SetIcon(ico)
 
 		my_sizer = wx.BoxSizer(wx.VERTICAL)
@@ -33,26 +38,46 @@ class MyFrame(wx.Frame):
 	def startSevices(self, event):
 		product_vendor = ['flipkart', 'amazon']
 		news_type = ['sport', 'top', 'latest', 'world', 'gadget']
-		query_text = self.txt.GetValue().lower()
-		split_query = query_text.split()
-		
-		if(query_text.startswith('flipk') or query_text.startswith('amazo')):
-			#search query for product on amazon or flipkart
-			[ps.productSearch(q_str, query_text.lower()) for q_str in product_vendor if split_query[0].lower() in q_str.lower()]
-		elif(split_query[0] in news_type):
-			#search query for news	
-			[news.newsFeeds(q_str) for q_str in news_type if split_query[0].lower() in q_str.lower()]
-		elif("joke" in query_text):
-			#search query for joke	
-			my_joke = joke.tellAJoke()
-			print(my_joke)
-			speak.Speak(my_joke)
-		elif("youtube" in query_text):
-			#search query for youtube	
-			you_tube_query = "+".join(query_text.lower().replace('youtube',"").split())
-			webbrowser.open('')
-		
-		
+		query_text = self.txt.GetValue()
+		if len(query_text) == 0:
+			speak.Speak("Speak your order, please")
+			query_text = s.getUserquery()
+		if query_text != None and len(query_text) > 0:
+			query_text = query_text.lower()
+			split_query = query_text.split()
+			print(query_text)
+			if(query_text.startswith('flipk') or query_text.startswith('amazo')):
+				#search query for product on amazon or flipkart
+				[ps.productSearch(q_str, query_text) for q_str in product_vendor if split_query[0] in q_str]
+			elif(split_query[0] in news_type):
+				#search query for news	
+				[news.newsFeeds(q_str) for q_str in news_type if split_query[0] in q_str]
+			elif("joke" in query_text):
+				#search query for joke	
+				speak.Speak("Looking for a good joke for you")
+				my_joke = joke.tellAJoke()
+				print(my_joke)
+				speak.Speak(my_joke)
+			elif("youtube" in query_text):
+				#search query for youtube	
+				ytb.playYoutubeVideo(query_text)
+			elif("when" in query_text) or ("festival" in query_text):
+				#search query for festival	
+				festival = fest.getfestivalTime(query_text)
+				print(festival)
+				speak.Speak(festival)
+			elif("website" in query_text):
+				#open any .com website
+				if len(split_query) > 1:
+					speak.Speak("opening "+ split_query[1])
+					webbrowser.open('https://www.'+split_query[1]+'.com')
+				else:
+					speak.Speak("Tell name of website to open")
+			elif('weather' in query_text):
+				weather = wf.getWeatherReport(split_query[-1])
+				if weather is not None:
+					print(weather)
+					speak.Speak(weather)
 		
 # Trigger GUI
 if __name__ == "__main__":

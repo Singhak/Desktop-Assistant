@@ -4,7 +4,7 @@ worldnews_url = "http://feeds.feedburner.com/ndtvnews-world-news"
 latestnews_url = "http://feeds.feedburner.com/ndtvnews-latest"
 gadgetsnews_url = "http://feeds.feedburner.com/gadgets360-latest"
 
-import feeds
+import newsfeedparse as feeds
 import win32com.client as wincl
 speak = wincl.Dispatch("SAPI.SpVoice")
 
