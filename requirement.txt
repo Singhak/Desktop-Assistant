@@ -4,3 +4,7 @@ pyAudio
 win32com
 webbrowser
 feedparser
+BeautifulSoup
+wxpython
+requests
+wikipedia
