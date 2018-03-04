@@ -9,6 +9,7 @@ import wikipedia
 import webbrowser
 import speech as s
 import weatherForcast as wf
+import searchQuery as sq
 
 speak = wincl.Dispatch("SAPI.SpVoice")
 speak.Speak('Whokum maire aakaa, Alien at your service.')
@@ -78,6 +79,13 @@ class MyFrame(wx.Frame):
 				if weather is not None:
 					print(weather)
 					speak.Speak(weather)
+			else:
+				speak.Speak('Searching for ' + query_text)
+				whois = sq.search(query_text)
+				print(whois)
+				speak.Speak(whois)
+				
+					
 		
 # Trigger GUI
 if __name__ == "__main__":

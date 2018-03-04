@@ -1,4 +1,4 @@
-#Alien a Desktop Assistant
+# Alien a Desktop Assistant
 
 ### Note
 It uses the
@@ -29,10 +29,11 @@ It uses the
 - Say or type  `when <festivalname>` Or `festival <festivalname>`
 - [x] <b>Search product on Flipkart or Amazon</b>
 - Say or type  `flipkart <productname>` Or `amazon <productname>`
+- [x] <b>Say any thing for search on wikki or google
+- Say or type `<anything>`
 
 ### Upcoming Feature
 - Local search
-- Google search
 - Open local files
 - And many more
 

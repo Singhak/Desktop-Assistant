@@ -8,3 +8,5 @@ BeautifulSoup
 wxpython
 requests
 wikipedia
+wolframalpha
+google-search
