@@ -1,7 +1,7 @@
 weather-api
 SpeachRecognition
 pyAudio
-win32com
+pywin32
 webbrowser
 feedparser
 BeautifulSoup
@@ -9,4 +9,3 @@ wxpython
 requests
 wikipedia
 wolframalpha
-google-search

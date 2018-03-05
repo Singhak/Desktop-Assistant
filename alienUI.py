@@ -10,6 +10,8 @@ import webbrowser
 import speech as s
 import weatherForcast as wf
 import searchQuery as sq
+import localfind as lf
+import imdbrating as imdb
 
 speak = wincl.Dispatch("SAPI.SpVoice")
 speak.Speak('Whokum maire aakaa, Alien at your service.')
@@ -75,15 +77,26 @@ class MyFrame(wx.Frame):
 				else:
 					speak.Speak("Tell name of website to open")
 			elif('weather' in query_text):
+				#search weather
 				weather = wf.getWeatherReport(split_query[-1])
 				if weather is not None:
 					print(weather)
 					speak.Speak(weather)
+			elif('open' in query_text):
+				lf.openFile(split_query[1:])
+			elif('list' in query_text):
+				#search list of files
+				fileList = lf.listAllFiles(" ".join(split_query[1:]))
+				print("\n".join(fileList))
+			elif('movie' in query_text) or ('imdb' in query_text):
+				#search movie
+				imdb.movieRating(" ".join(split_query[1:]))
 			else:
+				#search anything else
 				speak.Speak('Searching for ' + query_text)
-				whois = sq.search(query_text)
-				print(whois)
-				speak.Speak(whois)
+				ans = sq.search(query_text)
+				print(ans)
+				speak.Speak(ans)
 				
 					
 		
