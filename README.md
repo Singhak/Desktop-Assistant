@@ -1,5 +1,9 @@
 # Alien a Desktop Assistant
 
+### Installation Steps
+- pip install -r requirement.txt
+- python alienUI.py
+
 ### Note
 It uses the
 - Python 3+ (Tested with python 3.6)
@@ -40,5 +44,8 @@ It uses the
 
 ### Upcoming Feature
 - many more
+
+### Any issue
+- raised issue or message me [eamilId](anilsingh.singh09@gmail.com)
 
 > This project inspired by [Digital-Assistants](https://github.com/ab-anand/Digital-Assistants)
